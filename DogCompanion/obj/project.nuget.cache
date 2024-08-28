@@ -1,0 +1,12 @@
+{
+  "version": 2,
+  "dgSpecHash": "NTqt/+6wIiQ=",
+  "success": true,
+  "projectFilePath": "C:\\Users\\Admin\\Documents\\Modding\\stoneshard\\Tools\\MSL\\ModSources\\DogCompanion\\DogCompanion.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Admin\\.nuget\\packages\\microsoft.netcore.app.ref\\6.0.32\\microsoft.netcore.app.ref.6.0.32.nupkg.sha512",
+    "C:\\Users\\Admin\\.nuget\\packages\\microsoft.windowsdesktop.app.ref\\6.0.32\\microsoft.windowsdesktop.app.ref.6.0.32.nupkg.sha512",
+    "C:\\Users\\Admin\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\6.0.32\\microsoft.aspnetcore.app.ref.6.0.32.nupkg.sha512"
+  ],
+  "logs": []
+}
