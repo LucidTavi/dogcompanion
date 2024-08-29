@@ -1,6 +1,7 @@
 if instance_exists(o_player)
 {
     var _unit = choose(o_bandit_dog01, o_bandit_dog02, o_bandit_dog03)
+    var _unitTest = o_player_dog01
     var _x = scr_round_cell(mouse_x)
     var _y = scr_round_cell(mouse_y)
     if (distance_check && (!(scr_pat_prototype(_x, _y, 0, 0))) && scr_is_ground(x, y))
@@ -9,12 +10,14 @@ if instance_exists(o_player)
             scr_random_speech("useTrapDirwin")
         else
             scr_random_speech("useTrap")
-        with (scr_enemy_create(_x, _y, _unit, 0))
+        instance_create(x, y, o_accompany_creator)
+        with (scr_enemy_create(_x, _y, _unitTest, 0))
         {
             faction_id = "Companion"
+            faction = "Companion"
             image_speed = 1
             is_cheack = 0
-            owner = o_player
+            owner = other.owner
             gain_xp *= 0.1
             can_drop_loot = 0
             bEVS += ((owner.Vitality - 10) * 2)

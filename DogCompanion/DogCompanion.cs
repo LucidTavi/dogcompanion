@@ -37,6 +37,8 @@ namespace DogCompanion;
             CreateGameObject("o_inv_dogcage", "s_inv_dogcage", "o_inv_consum_active", true);
             CreateGameObject("o_skill_set_dog", "", "o_skills_like", true);
 
+            CreateGameObject("o_player_dog01","s_wardog01", "o_bandit_dog_parent", false);
+
             CreateGameObject("o_b_accompanymaster", "", "o_class_skills", true);
 
             CreateGameObject("o_accompany_creator", "", "", false);
@@ -60,6 +62,10 @@ namespace DogCompanion;
                 new ScriptSet("o_skill_set_dog", "gml_Object_o_skill_set_dog_Alarm_1.gml", EventType.Alarm, 1),
                 new ScriptSet("o_skill_set_dog", "gml_Object_o_skill_set_dog_Create_0.gml"),
                 new ScriptSet("o_skill_set_dog", "gml_Object_o_skill_set_dog_Draw_0.gml", EventType.Draw, 0),
+
+                new ScriptSet("o_player_dog01", "gml_Object_o_player_dog01_Create_0.gml"),
+                new ScriptSet("o_player_dog01", "gml_Object_o_player_dog01_Destroy_0.gml", EventType.Destroy, 0),
+                new ScriptSet("o_player_dog01", "gml_Object_o_player_dog01_PreCreate_0.gml", EventType.PreCreate, 0),
 
                 // Accompany or serve player
                 new ScriptSet("o_b_accompanymaster", "gml_Object_o_b_accompanymaster_Create_0.gml"),
@@ -114,7 +120,7 @@ scr_create_context_menu(""Atack"", ""Explore"", ""Swap"")
             List<string>? ai_table = ModLoader.GetTable("gml_GlobalScript_table_animals_ai");
             List<string> new_ai_elements = new() { 
                 "Companion;", 
-                "3;", // moose
+                "1;", // moose
                 "3;", // saiga
                 "3;", // deer
                 "1;", // bear
@@ -129,6 +135,7 @@ scr_create_context_menu(""Atack"", ""Explore"", ""Swap"")
                 "3;", // hedgehog
                 "3;", // snake
                 "1;", // forest buzzer
+                ";", // Player
                 "1;", // brigand
                 ";", // grandMagistrate
                 ";", // rotten willow
@@ -137,9 +144,10 @@ scr_create_context_menu(""Atack"", ""Explore"", ""Swap"")
                 "1;", // carnivore
                 "1;", // omnivore
                 "1;", // dog
+                "1;", // buzzer hive
                 "1;", // crawler
                 "1;", // harpy
-                "Companion;1;1;1;1;1;1;3;1;1;1;1;1;1;1;1;1;;;1;1;1;1;1;1;1;;",
+                "Companion;1;1;1;1;1;1;3;1;1;1;1;1;1;1;1;;1;;;1;1;1;1;1;1;1;1;",
             };
             if (ai_table != null)
             {
