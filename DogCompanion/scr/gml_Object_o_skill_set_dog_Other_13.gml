@@ -11,10 +11,11 @@ if instance_exists(o_player)
             scr_random_speech("useTrap")
         with (scr_enemy_create(_x, _y, _unit, 0))
         {
+            faction_id = "Companion"
             image_speed = 1
             is_cheack = 0
-            owner = other.owner
-            gain_xp *= 1
+            owner = o_player
+            gain_xp *= 0.1
             can_drop_loot = 0
             bEVS += ((owner.Vitality - 10) * 2)
             bHit_Chance += ((owner.WIL - 10) * 2)
@@ -22,7 +23,6 @@ if instance_exists(o_player)
             bHP += (((owner.Vitality / 3) * HP) - HP)
             ds_map_add(data, "Pure_Damage_Self", 1)
             alarm[0] = -1
-            faction = "Companion"
             scr_audio_play_at(choose(snd_dog_alert_1, snd_dog_alert_2, snd_dog_alert_3, snd_dog_alert_4))
             scr_characterStatsUpdateAdd("usedTraps", 1)
         }

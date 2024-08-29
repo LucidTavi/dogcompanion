@@ -62,20 +62,20 @@ namespace DogCompanion;
                 new ScriptSet("o_skill_set_dog", "gml_Object_o_skill_set_dog_Draw_0.gml", EventType.Draw, 0),
 
                 // Accompany or serve player
-                //new ScriptSet("o_b_accompanymaster", "gml_Object_o_b_accompanymaster_Create_0.gml"),
-                //new ScriptSet("o_b_accompanymaster", "gml_Object_o_b_accompanymaster_Alarm_2.gml", EventType.Alarm, 2),
-                //new ScriptSet("o_b_accompanymaster", "gml_Object_o_b_accompanymaster_Alarm_7.gml", EventType.Alarm, 7),
-                //new ScriptSet("o_b_accompanymaster", "gml_Object_o_b_accompanymaster_Alarm_6.gml", EventType.Alarm, 6),
-                //new ScriptSet("o_b_accompanymaster", "gml_Object_o_b_accompanymaster_Alarm_8.gml", EventType.Alarm, 8),
-                //new ScriptSet("o_b_accompanymaster", "gml_Object_o_b_accompanymaster_Step_0.gml", EventType.Step, 0),
-                //new ScriptSet("o_b_accompanymaster", "gml_Object_o_b_accompanymaster_Other_10.gml", EventType.Other, 10),
-                //new ScriptSet("o_b_accompanymaster", "gml_Object_o_b_accompanymaster_PreCreate_0.gml", EventType.PreCreate, 0),
+                new ScriptSet("o_b_accompanymaster", "gml_Object_o_b_accompanymaster_Create_0.gml"),
+                new ScriptSet("o_b_accompanymaster", "gml_Object_o_b_accompanymaster_Alarm_2.gml", EventType.Alarm, 2),
+                new ScriptSet("o_b_accompanymaster", "gml_Object_o_b_accompanymaster_Alarm_7.gml", EventType.Alarm, 7),
+                new ScriptSet("o_b_accompanymaster", "gml_Object_o_b_accompanymaster_Alarm_6.gml", EventType.Alarm, 6),
+                new ScriptSet("o_b_accompanymaster", "gml_Object_o_b_accompanymaster_Alarm_8.gml", EventType.Alarm, 8),
+                new ScriptSet("o_b_accompanymaster", "gml_Object_o_b_accompanymaster_Step_0.gml", EventType.Step, 0),
+                new ScriptSet("o_b_accompanymaster", "gml_Object_o_b_accompanymaster_Other_10.gml", EventType.Other, 10),
+                new ScriptSet("o_b_accompanymaster", "gml_Object_o_b_accompanymaster_PreCreate_0.gml", EventType.PreCreate, 0),
 
                 // Accompany or buff player
-                //new ScriptSet("o_accompany_creator", "gml_Object_o_accompany_creator_Create_0.gml"),
-                //new ScriptSet("o_accompany_creator", "gml_Object_o_accompany_creator_Alarm_1.gml", EventType.Alarm, 1),
-                //new ScriptSet("o_accompany_creator", "gml_Object_o_accompany_creator_Alarm_2.gml", EventType.Alarm, 2),
-                //new ScriptSet("o_accompany_creator", "gml_Object_o_accompany_creator_PreCreate_0.gml", EventType.PreCreate, 0)
+                new ScriptSet("o_accompany_creator", "gml_Object_o_accompany_creator_Create_0.gml"),
+                new ScriptSet("o_accompany_creator", "gml_Object_o_accompany_creator_Alarm_1.gml", EventType.Alarm, 1),
+                new ScriptSet("o_accompany_creator", "gml_Object_o_accompany_creator_Alarm_2.gml", EventType.Alarm, 2),
+                new ScriptSet("o_accompany_creator", "gml_Object_o_accompany_creator_PreCreate_0.gml", EventType.PreCreate, 0)
             };
 
             // Creates all listed scripts
@@ -102,26 +102,13 @@ namespace DogCompanion;
             .InsertBelow("}")
             .Save();
                     
-//            Msl.LoadGML("gml_Object_o_enemy_Mouse_5")
-//            .MatchFrom("global.skill_test\nscr_create_context_menu(\"Test_Skill\")")
-//            .ReplaceBy(@"if (faction_id == ""Companion"")
-//{
-//scr_create_context_menu(""Atack"", ""Explore"", ""Swap"")
-//}")
-//            .Save();
-
-//        Msl.LoadGML("gml_Object_o_Bandit_Draw_0")
-//            .MatchFrom("image_index = 0")
-//            .InsertBelow(@"if (faction_id == ""Companion"")
-//{
-//if (object_index == o_bandit_dog01)
-//sprite_index = s_bandit_dog01
-//if (object_index == o_bandit_dog02)
-//sprite_index = s_bandit_dog01
-//if (object_index == o_bandit_dog03)
-//sprite_index = s_bandit_dog01
-//}")
-//            .Save();
+            Msl.LoadGML("gml_Object_o_enemy_Mouse_5")
+            .MatchFrom("global.skill_test\nscr_create_context_menu(\"Test_Skill\")")
+            .ReplaceBy(@"if (faction_id == ""Companion"")
+{
+scr_create_context_menu(""Atack"", ""Explore"", ""Swap"")
+}")
+            .Save();
 
             // Create faction
             List<string>? ai_table = ModLoader.GetTable("gml_GlobalScript_table_animals_ai");
@@ -188,8 +175,8 @@ namespace DogCompanion;
                 .Save();
 
             UndertaleSprite s_wardog_set_indicator = Msl.GetSprite("s_wardog_set_indicator");
-            s_wardog_set_indicator.OriginX = 26;
-            s_wardog_set_indicator.OriginY = 15;
+            s_wardog_set_indicator.OriginX = 20; //15 21
+            s_wardog_set_indicator.OriginY = 10;
             s_wardog_set_indicator.IsSpecialType = true;
             s_wardog_set_indicator.SVersion = 3;
             s_wardog_set_indicator.GMS2PlaybackSpeed = 1f;
