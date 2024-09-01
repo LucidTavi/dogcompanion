@@ -39,9 +39,11 @@ namespace DogCompanion;
 
             CreateGameObject("o_player_dog01","s_wardog01", "o_bandit_dog_parent", false);
 
-            CreateGameObject("o_b_accompanymaster", "", "o_class_skills", true);
+            CreateGameObject("o_b_accompanymaster", "", "o_invisible_buff", true); // o_b_servermaster
 
-            CreateGameObject("o_accompany_creator", "", "", false);
+            CreateGameObject("o_accompany_creator", "", "", false); // o_res_buff_creator
+
+            CreateGameObject("o_companion_fixer", "", "", false); // undead_fixer
 
             ScriptSet[] scriptsToAdd = new ScriptSet[]
             {
@@ -81,7 +83,14 @@ namespace DogCompanion;
                 new ScriptSet("o_accompany_creator", "gml_Object_o_accompany_creator_Create_0.gml"),
                 new ScriptSet("o_accompany_creator", "gml_Object_o_accompany_creator_Alarm_1.gml", EventType.Alarm, 1),
                 new ScriptSet("o_accompany_creator", "gml_Object_o_accompany_creator_Alarm_2.gml", EventType.Alarm, 2),
-                new ScriptSet("o_accompany_creator", "gml_Object_o_accompany_creator_PreCreate_0.gml", EventType.PreCreate, 0)
+                new ScriptSet("o_accompany_creator", "gml_Object_o_accompany_creator_PreCreate_0.gml", EventType.PreCreate, 0),
+
+                // Companion fixer
+                new ScriptSet("o_companion_fixer", "gml_Object_o_companion_fixer_Create_0.gml"),
+                new ScriptSet("o_companion_fixer", "gml_Object_o_companion_fixer_Alarm_1.gml", EventType.Alarm, 1),
+                new ScriptSet("o_companion_fixer", "gml_Object_o_companion_fixer_Alarm_2.gml", EventType.Alarm, 2),
+                new ScriptSet("o_companion_fixer", "gml_Object_o_companion_fixer_PreCreate_0.gml", EventType.PreCreate, 0),
+
             };
 
             // Creates all listed scripts
@@ -95,6 +104,9 @@ namespace DogCompanion;
                 );
             }
 
+            // function
+            Msl.AddFunction(ModFiles.GetCode("gml_GlobalScript_scr_tavi_checker.gml"), "scr_tavi_checker");
+
             // Adds dog cage to the table
             Msl.LoadGML("gml_GlobalScript_table_Modifiers")
                 .MatchAll()
@@ -102,12 +114,19 @@ namespace DogCompanion;
                 .Save();
 
             Msl.LoadGML("gml_Object_o_enemy_Mouse_5")
-            .MatchFrom("global.skill_test\nscr_create_context_menu(\"Test_Skill\")")
-            .ReplaceBy(@"if (faction_id == ""Companion"")
+                .MatchFrom("global.skill_test\nscr_create_context_menu(\"Test_Skill\")")
+                .ReplaceBy(@"if (faction_id == ""Companion"")
 {
 scr_create_context_menu(""Atack"", ""Explore"", ""Swap"")
 }")
-            .Save();
+                .Save();
+
+            Msl.LoadGML("gml_Object_o_howl_Alarm_0")
+                .MatchFrom("(id != other.owner)")
+                .InsertAbove("if (!(scr_instance_exists_in_list(o_b_servemaster, buffs)))\n{")
+                .MatchFrom("state = \"npc combat\"")
+                .InsertBelow("}")
+                .Save();
 
             Msl.LoadGML("gml_GlobalScript_scr_param")
                 .MatchFrom("_needChange = argument[1]")
@@ -157,7 +176,7 @@ scr_create_context_menu(""Atack"", ""Explore"", ""Swap"")
                 "1;", // buzzer hive
                 "1;", // crawler
                 "1;", // harpy
-                "Companion;1;1;1;1;1;1;3;1;1;1;1;1;1;1;1;;1;;;1;1;1;1;1;1;1;1;"
+                "Companion;1;1;1;1;1;1;3;1;1;1;1;1;1;1;1;;1;;;1;1;1;1;1;1;1;1;;"
             };
             if (ai_table != null)
             {
