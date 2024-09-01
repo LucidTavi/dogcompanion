@@ -101,13 +101,6 @@ namespace DogCompanion;
                 .ReplaceBy(ModFiles, "gml_GlobalScript_table_Modifiers.gml")
                 .Save();
 
-            Msl.LoadGML("gml_GlobalScript_scr_penalty_player_attack")
-            .MatchFrom("instance_exists(o_player)")
-            .InsertAbove("if (faction_id != \"Companion\"){")
-            .MatchFrom("return 1")
-            .InsertBelow("}")
-            .Save();
-                    
             Msl.LoadGML("gml_Object_o_enemy_Mouse_5")
             .MatchFrom("global.skill_test\nscr_create_context_menu(\"Test_Skill\")")
             .ReplaceBy(@"if (faction_id == ""Companion"")
@@ -115,6 +108,24 @@ namespace DogCompanion;
 scr_create_context_menu(""Atack"", ""Explore"", ""Swap"")
 }")
             .Save();
+
+            Msl.LoadGML("gml_GlobalScript_scr_param")
+                .MatchFrom("_needChange = argument[1]")
+                .InsertBelow("var _comppass = 0\nif (argument_count > 2){\n_comppass = argument[2]}")
+                .MatchFrom("faction_id = scr_GetMobParametrString(\"faction\")")
+                .InsertAbove("if (_comppass || instance_exists(o_accompany_creator))\n{\nfaction_id = \"Companion\"\nsubfaction_id = faction_id\n}\nelse{")
+                .MatchFrom("subfaction_id = argument[0]")
+                .InsertBelow("}")
+                .Peek()
+                .Save();
+
+            Msl.LoadGML("gml_GlobalScript_scr_penalty_player_attack")
+                .MatchFrom("instance_exists(o_player)")
+                .InsertAbove("if (faction_id != \"Companion\"){")
+                .MatchFrom("return 1")
+                .InsertBelow("}")
+                .Peek()
+                .Save();                
 
             // Create faction
             List<string>? ai_table = ModLoader.GetTable("gml_GlobalScript_table_animals_ai");
@@ -128,14 +139,13 @@ scr_create_context_menu(""Atack"", ""Explore"", ""Swap"")
                 "1;", // gulon
                 "1;", // young troll
                 "3;", // fox
-                "3;", // boar
+                "1;", // boar
                 "2;", // bison
                 "3;", // squirrel
                 "3;", // rabbit
                 "3;", // hedgehog
                 "3;", // snake
                 "1;", // forest buzzer
-                ";", // Player
                 "1;", // brigand
                 ";", // grandMagistrate
                 ";", // rotten willow
@@ -147,7 +157,7 @@ scr_create_context_menu(""Atack"", ""Explore"", ""Swap"")
                 "1;", // buzzer hive
                 "1;", // crawler
                 "1;", // harpy
-                "Companion;1;1;1;1;1;1;3;1;1;1;1;1;1;1;1;;1;;;1;1;1;1;1;1;1;1;",
+                "Companion;1;1;1;1;1;1;3;1;1;1;1;1;1;1;1;;1;;;1;1;1;1;1;1;1;1;"
             };
             if (ai_table != null)
             {
@@ -158,9 +168,10 @@ scr_create_context_menu(""Atack"", ""Explore"", ""Swap"")
                     ai_table[i] = ai_table[i] + new_ai_elements[i];
                 }
                 ai_table.Insert(i, new_ai_elements[i]);
+                i++;
+                ai_table.Insert(i, new_ai_elements[i]);
                 ModLoader.SetTable(ai_table, "gml_GlobalScript_table_animals_ai");
             }
-
 
             // Localization for the description of the dog cage 
             LocalizationItem localizationTable = new(

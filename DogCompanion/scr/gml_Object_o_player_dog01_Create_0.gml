@@ -11,10 +11,3 @@ netWaterDeepDrawLimit = 22
 shadow_spr_shift = [-3, 1]
 waterwaveShallowOffset = [-1, -1]
 waterwaveDeepOffset = [-1, -1]
-faction_id = "Companion"
-faction = "Companion"
-
-scr_set_hl()
-scr_create_skill_map("Loud_Barking")
-scr_create_skill_map("Grab_Em")
-ai_script = gml_Script_scr_enemy_choose_state
