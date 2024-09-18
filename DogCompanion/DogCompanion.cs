@@ -143,8 +143,7 @@ scr_create_context_menu(""Atack"", ""Explore"", ""Swap"")
                 .InsertAbove("if (faction_id != \"Companion\"){")
                 .MatchFrom("return 1")
                 .InsertBelow("}")
-                .Peek()
-                .Save();                
+                .Save();           
 
             // Create faction
             List<string>? ai_table = ModLoader.GetTable("gml_GlobalScript_table_animals_ai");
