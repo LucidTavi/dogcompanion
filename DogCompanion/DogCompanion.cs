@@ -105,7 +105,7 @@ namespace DogCompanion;
             }
 
             // function
-            Msl.AddFunction(ModFiles.GetCode("gml_GlobalScript_scr_tavi_checker.gml"), "scr_tavi_checker");
+            Msl.AddFunction(ModFiles.GetCode("gml_GlobalScript_scr_companion_checker.gml"), "scr_companion_checker");
 
             // Adds dog cage to the table
             Msl.LoadGML("gml_GlobalScript_table_Modifiers")
